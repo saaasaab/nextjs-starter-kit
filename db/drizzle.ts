@@ -3,4 +3,12 @@ import { drizzle } from 'drizzle-orm/neon-http';
 
 config({ path: ".env" }); // or .env.local
 
-export const db = drizzle(process.env.DATABASE_URL!);
+
+function getDb(){
+    if(process.env.DATABASE_URL){
+        return drizzle(process.env.DATABASE_URL);
+    }   
+}
+
+export const db = getDb();
+
